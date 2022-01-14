@@ -14,8 +14,6 @@ class SeriesController extends Controller
     public function index()
     {
         $series = Serie::all();
-
-        // var_dump($series);exit;
         return view('series.index', compact('series'));
     }
 
@@ -28,10 +26,13 @@ class SeriesController extends Controller
     {
             // $nome = $request->get('nome'); 
             $nome = $request->nome;
-          
-            $serie = new Serie();
-            $serie->nome = $nome;
-            // var_dump($nome);exit;
-           var_dump( $serie->save());
+            
+        //    $serie =  Serie::create(
+        //         ['nome' => $nome]
+        //     );
+
+            $serie = Serie::create($request->all());
+
+            echo "Serie em id {$serie->id} criada: {$serie->nome}";
     }
 }
