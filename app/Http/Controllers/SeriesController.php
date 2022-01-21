@@ -1,18 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Serie;
 use Illuminate\Http\Request;
 
-/**
- * Undocumented class
- */
+
 class SeriesController extends Controller
 {
     /**
      * Undocumented function
      *
+     * @param  Request $request
      * @return void
      */
     public function index(Request $request)
@@ -31,7 +29,6 @@ class SeriesController extends Controller
     }
 
     /**
-     * Undocumented function
      *
      * @param Request $request
      * @return void
@@ -43,7 +40,7 @@ class SeriesController extends Controller
         $serie = Serie::create($request->all());
         $request->session()->flash('mensagem', "Serie id {$serie->id}, com nome {$serie->nome}");
 
-        return redirect('/series');
+        return redirect()->route('listar_series');
     }
 
     public function destroy(Request $request)
@@ -52,6 +49,6 @@ class SeriesController extends Controller
        
        $request->session()->flash('mensagem', "Serie removida com sucesso");
 
-       return redirect('/series');
+       return redirect()->route('listar_series');
     }
 }
