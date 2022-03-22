@@ -36,12 +36,11 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request)
     {
         $serie = Serie::create(['nome'=>$request->nome]);
+        for ($i=1; $i <= $request->qtd_temporadas; $i++) { 
+            
+            $temporada =  $serie->temporadas()->create(['numero' => $i]);
 
-        for ($i=1; $i < $request->qtd_temporadas; $i++) { 
-
-           $temporada =  $serie->temporadas()->create(['numero' => $i]);
-
-           for ($j=0; $j < $request->epi_temporadas; $j++) { 
+           for ($j=1; $j <= $request->epi_temporadas; $j++) { 
               $temporada->episodios()->create(['numero' => $j]);
            }
         }
